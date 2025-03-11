@@ -20,7 +20,7 @@ const Header = () => {
             />
           </a>
         </h1>
-        <div className="relative md:justifty-self-center">
+        <div className="relative md:justify-self-center">
           <button
             className="menu-btn md:hidden"
             onClick={() => setNavOpen((prev) => !prev)}
@@ -33,7 +33,7 @@ const Header = () => {
         </div>
         <a
           href="#contact"
-          className="btn btn-secondary max-md:hidden md:justify-self-end"
+          className="btn btn-secondary hidden md:block md:justify-self-end"
         >
           Contact Me
         </a>

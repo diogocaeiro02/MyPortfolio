@@ -13,7 +13,39 @@ const Navbar = ({ navOpen }) => {
     activeBox.current.style.height = lastActiveLink.current.offsetHeight + "px";
   };
 
-  useEffect(initActiveBox, []);
+  //   useEffect(initActiveBox, []);
+  //   window.addEventListener("resize", initActiveBox);
+
+  useEffect(() => {
+    initActiveBox();
+    window.addEventListener("resize", initActiveBox);
+
+    return () => window.removeEventListener("resize", initActiveBox);
+  }, []);
+
+  //   const activeCurrentLink = (event) => {
+  //     lastActiveLink.current?.classList.remove("active");
+  //     event.target.classList.add("active");
+  //     lastActiveLink.current = event.target;
+
+  //     activeBox.current.style.top = event.target.offsetTop + "px";
+  //     activeBox.current.style.left = event.target.offsetLeft + "px";
+  //     activeBox.current.style.width = event.target.offsetWidth + "px";
+  //     activeBox.current.style.height = event.target.offsetHeight + "px";
+  //   };
+
+  const activeCurrentLink = (event) => {
+    if (lastActiveLink.current) {
+      lastActiveLink.current.classList.remove("active");
+    }
+    event.target.classList.add("active");
+    lastActiveLink.current = event.target;
+
+    activeBox.current.style.top = `${event.target.offsetTop}px`;
+    activeBox.current.style.left = `${event.target.offsetLeft}px`;
+    activeBox.current.style.width = `${event.target.offsetWidth}px`;
+    activeBox.current.style.height = `${event.target.offsetHeight}px`;
+  };
 
   const navItems = [
     {
@@ -45,9 +77,15 @@ const Navbar = ({ navOpen }) => {
   ];
 
   return (
-    <nav className={"navbar " + (navOpen ? `active` : ``)}>
+    <nav className={`navbar ${navOpen ? "active" : ""}`}>
       {navItems.map(({ label, link, className, ref }, key) => (
-        <a href={link} key={key} ref={ref} className={className} onClick={null}>
+        <a
+          href={link}
+          key={key}
+          ref={ref}
+          className={className}
+          onClick={activeCurrentLink}
+        >
           {label}
         </a>
       ))}
