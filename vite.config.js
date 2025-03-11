@@ -11,5 +11,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [tailwindcss(), react(), tailwindScrollbar({ nocompatible: true })],
+  plugins: [tailwindcss(), react(), tailwindScrollbar()],
 });
